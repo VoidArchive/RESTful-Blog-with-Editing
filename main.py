@@ -55,6 +55,10 @@ def show_post(post_id):
     requested_post = db.session.query(BlogPost).get(post_id)
     return render_template("post.html", post=requested_post)
 
+@app.route('/new-post',methods=['GET','POST'])
+def add_new_post():
+    form = CreatePostForm()
+    render_template('make-post.html', form=form)
 
 @app.route("/about")
 def about():
@@ -70,10 +74,6 @@ def edit_post():
     pass
 
 
-@app.route('/new-post',methods=['GET','POST'])
-def new_post():
-    form = CreatePostForm()
-    render_template('make-post.html', form=form)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
